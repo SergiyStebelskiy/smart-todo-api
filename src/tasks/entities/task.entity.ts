@@ -19,16 +19,19 @@ export class Task extends Model {
   @Column(DataType.UUIDV4)
   id: string;
 
+  @AllowNull(false)
   @Column
   name: string;
 
   @Column
   description: string;
 
+  @AllowNull(false)
   @Column({ defaultValue: false })
-  @Column
   checked: boolean;
 
+  @AllowNull(false)
+  @Column
   priority: string;
 
   @CreatedAt

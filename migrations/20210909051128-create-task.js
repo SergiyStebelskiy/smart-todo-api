@@ -9,15 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       description: {
         type: Sequelize.STRING,
       },
       checked: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
       },
       priority: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       created_at: {

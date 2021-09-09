@@ -17,9 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       checked: DataTypes.BOOLEAN,
       priority: DataTypes.STRING,
-      created_at: DataTypes.DATE,
-      updated_at: DataTypes.DATE,
-      deleted_at: DataTypes.DATE,
     },
     {
       sequelize,
