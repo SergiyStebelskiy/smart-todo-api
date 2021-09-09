@@ -1,19 +1,19 @@
-import { IsNotEmpty, IsString, IsBoolean } from 'class-validator';
-import { OneOf } from 'decorators';
+import { IsNotEmpty, IsString, IsBoolean } from 'class-validator'
+import { OneOf } from 'decorators'
 
 export class CreateTaskDto {
-  @IsNotEmpty()
-  @IsString()
-  name: string;
+	@IsNotEmpty()
+	@IsString()
+	name: string
 
-  @IsString()
-  description: string;
+	@IsString()
+	description: string
 
-  @IsBoolean()
-  checked: boolean;
+	@IsBoolean()
+	checked: boolean
 
-  @IsNotEmpty()
-  @IsString()
-  @OneOf(['low', 'normal', 'hight'])
-  priority: string;
+	@IsNotEmpty()
+	@IsString()
+	@OneOf(['low', 'normal', 'hight'])
+	priority: string
 }
