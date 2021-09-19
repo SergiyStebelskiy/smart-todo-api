@@ -4,7 +4,8 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { TasksModule } from './tasks/tasks.module'
 import { Task } from './tasks/entities/task.entity'
-import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity'
+import { UsersModule } from './users/users.module'
 
 @Module({
 	imports: [
@@ -15,7 +16,7 @@ import { UsersModule } from './users/users.module';
 			username: 'admin',
 			password: 'admin',
 			database: 'smart_todo',
-			models: [Task],
+			models: [Task, User],
 			define: {
 				timestamps: false
 			}
