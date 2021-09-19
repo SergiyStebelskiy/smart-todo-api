@@ -4,6 +4,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { TasksModule } from './tasks/tasks.module'
 import { Task } from './tasks/entities/task.entity'
+import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [
@@ -19,7 +20,8 @@ import { Task } from './tasks/entities/task.entity'
 				timestamps: false
 			}
 		}),
-		TasksModule
+		TasksModule,
+		UsersModule
 	],
 	controllers: [AppController],
 	providers: [AppService]
