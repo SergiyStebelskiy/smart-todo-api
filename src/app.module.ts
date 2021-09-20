@@ -6,6 +6,7 @@ import { TasksModule } from './tasks/tasks.module'
 import { Task } from './tasks/entities/task.entity'
 import { User } from './users/entities/user.entity'
 import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module';
 
 @Module({
 	imports: [
@@ -22,7 +23,8 @@ import { UsersModule } from './users/users.module'
 			}
 		}),
 		TasksModule,
-		UsersModule
+		UsersModule,
+		AuthModule
 	],
 	controllers: [AppController],
 	providers: [AppService]

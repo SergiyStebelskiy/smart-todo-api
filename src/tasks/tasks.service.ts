@@ -34,7 +34,7 @@ export class TasksService {
 		return task
 	}
 
-	async remove(id: number) {
+	async delete(id: number) {
 		const task = await this.findOne(id)
 		if (task instanceof NotFoundException) return task
 		return await task.destroy()

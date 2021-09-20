@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
-import { CreateUserDto } from './dto/create-user.dto'
 import { User } from './entities/user.entity'
 
 @Injectable()
@@ -9,15 +8,12 @@ export class UsersService {
 		@InjectModel(User)
 		private userModel: typeof User
 	) {}
-	create(_createUserDto: CreateUserDto) {
-		return this.userModel.create(_createUserDto)
-	}
 
 	async findAll(): Promise<User[]> {
 		return this.userModel.findAll()
 	}
 
-	async findOne(id: number) {
+	async findOneById(id: number) {
 		const user = await this.userModel.findOne({
 			where: {
 				id
@@ -25,5 +21,21 @@ export class UsersService {
 		})
 		if (user) return user
 		throw new NotFoundException()
+	}
+
+	async findOneByEmail(email: string) {
+		const user = await this.userModel.findOne({
+			where: {
+				email
+			}
+		})
+		if (user) return user
+		throw new NotFoundException()
+	}
+
+	async delete(id: number) {
+		const user = await this.findOneById(id)
+		if (user instanceof NotFoundException) return user
+		return await user.destroy()
 	}
 }
