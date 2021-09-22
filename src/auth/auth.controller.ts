@@ -13,7 +13,6 @@ export class AuthController {
 		return this.authService.login(req.user)
 	}
 
-	@UseGuards(LocalAuthGuard)
 	@Post('registration')
 	async registrate(@Body() createUserDto: CreateUserDto) {
 		return this.authService.registrate(createUserDto)
