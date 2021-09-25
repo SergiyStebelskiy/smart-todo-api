@@ -26,7 +26,8 @@ export class AuthService {
 	}
 
 	async login(user: any) {
-		const payload = { email: user.email, sub: user.userId }
+		const payload = { email: user.email, sub: user.id }
+
 		return {
 			access_token: this.jwtService.sign(payload)
 		}
@@ -34,6 +35,14 @@ export class AuthService {
 
 	async registrate(_createUserDto: CreateUserDto) {
 		const password = await bcrypt.hash(_createUserDto.password, 10)
-		return this.userModel.create({ ..._createUserDto, password })
+		return this.userModel.create(
+			{
+				..._createUserDto,
+				password
+			},
+			{
+				fields: ['first_name', 'last_name', 'email']
+			}
+		)
 	}
 }

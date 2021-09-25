@@ -34,6 +34,10 @@ export class Task extends Model {
 	@Column
 	priority: string
 
+	@AllowNull(false)
+	@Column
+	owner_id: string
+
 	@CreatedAt
 	@Column
 	created_at: Date

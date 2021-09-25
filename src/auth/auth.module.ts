@@ -17,7 +17,7 @@ import { SequelizeModule } from '@nestjs/sequelize'
 		PassportModule,
 		JwtModule.register({
 			secret: jwtConstants.secret,
-			signOptions: { expiresIn: '60s' }
+			signOptions: { expiresIn: '24h' }
 		}),
 		SequelizeModule.forFeature([User])
 	],
