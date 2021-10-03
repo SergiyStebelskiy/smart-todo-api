@@ -9,7 +9,7 @@ import { AuthController } from './auth.controller'
 import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from './constants'
 import { User } from '../users/entities/user.entity'
-import { SequelizeModule } from '@nestjs/sequelize'
+import { TypeOrmModule } from '@nestjs/typeorm'
 
 @Module({
 	imports: [
@@ -19,7 +19,7 @@ import { SequelizeModule } from '@nestjs/sequelize'
 			secret: jwtConstants.secret,
 			signOptions: { expiresIn: '24h' }
 		}),
-		SequelizeModule.forFeature([User])
+		TypeOrmModule.forFeature([User])
 	],
 	providers: [AuthService, UsersService, LocalStrategy, JwtStrategy],
 	controllers: [AuthController],

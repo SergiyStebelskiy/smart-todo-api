@@ -1,52 +1,34 @@
 import {
+	Entity,
 	Column,
-	Model,
-	Table,
-	DataType,
-	AutoIncrement,
-	PrimaryKey,
-	AllowNull,
-	CreatedAt,
-	UpdatedAt,
-	DeletedAt
-} from 'sequelize-typescript'
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn
+} from 'typeorm'
 
-@Table
-export class Task extends Model {
-	@AutoIncrement
-	@PrimaryKey
-	@AllowNull(false)
-	@Column(DataType.UUIDV4)
-	id: string
+@Entity('tasks')
+export class Task {
+	@PrimaryGeneratedColumn()
+	id: number
 
-	@AllowNull(false)
-	@Column
+	@Column()
 	name: string
 
-	@Column
+	@Column()
 	description: string
 
-	@AllowNull(false)
-	@Column({ defaultValue: false })
+	@Column({ default: false })
 	checked: boolean
 
-	@AllowNull(false)
-	@Column
+	@Column()
 	priority: string
 
-	@AllowNull(false)
-	@Column
+	@Column()
 	owner_id: string
 
-	@CreatedAt
-	@Column
+	@CreateDateColumn()
 	created_at: Date
 
-	@UpdatedAt
-	@Column
+	@UpdateDateColumn()
 	updated_at: Date
-
-	@DeletedAt
-	@Column
-	deleted_at: Date
 }

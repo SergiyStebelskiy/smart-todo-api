@@ -1,51 +1,31 @@
 import {
+	Entity,
 	Column,
-	Model,
-	Table,
-	DataType,
-	AutoIncrement,
-	PrimaryKey,
-	IsEmail,
-	AllowNull,
-	CreatedAt,
-	UpdatedAt,
-	DeletedAt
-} from 'sequelize-typescript'
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn
+} from 'typeorm'
 
-@Table
-export class User extends Model {
-	@AutoIncrement
-	@PrimaryKey
-	@AllowNull(false)
-	@Column(DataType.UUIDV4)
-	id: string
+@Entity('users')
+export class User {
+	@PrimaryGeneratedColumn()
+	id: number
 
-	@AllowNull(false)
-	@Column
+	@Column()
 	first_name: string
 
-	@AllowNull(false)
-	@Column
+	@Column()
 	last_name: string
 
-	@AllowNull(false)
-	@IsEmail
-	@Column
+	@Column()
 	email: string
 
-	@AllowNull(false)
-	@Column
+	@Column()
 	password: string
 
-	@CreatedAt
-	@Column
+	@CreateDateColumn()
 	created_at: Date
 
-	@UpdatedAt
-	@Column
+	@UpdateDateColumn()
 	updated_at: Date
-
-	@DeletedAt
-	@Column
-	deleted_at: Date
 }

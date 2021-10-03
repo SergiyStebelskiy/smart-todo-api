@@ -27,14 +27,14 @@ export class TasksController {
 	@UseGuards(JwtAuthGuard)
 	@Get()
 	findAll(@Request() req) {
-		const userId = req.user.id
+		const userId = req.user?.id || 1
 		return this.tasksService.findAll(userId)
 	}
 
 	@UseGuards(JwtAuthGuard)
 	@Get(':id')
 	findOne(@Param('id') id: string, @Request() req) {
-		const userId = req.user.id
+		const userId = req.user?.id || 2
 		return this.tasksService.findOne(+id, userId)
 	}
 
