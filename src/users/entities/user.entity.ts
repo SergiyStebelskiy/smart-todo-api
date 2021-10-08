@@ -20,7 +20,7 @@ export class User {
 	@Column()
 	email: string
 
-	@Column()
+	@Column({ default: '' })
 	password: string
 
 	@CreateDateColumn()

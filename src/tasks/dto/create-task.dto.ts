@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsBoolean } from 'class-validator'
-import { OneOf } from 'decorators'
+import { OneOf } from '../../../decorators/index'
 
 export class CreateTaskDto {
 	@IsNotEmpty()

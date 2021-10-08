@@ -23,7 +23,7 @@ export class Task {
 	@Column()
 	priority: string
 
-	@Column()
+	@Column({ default: '' })
 	owner_id: string
 
 	@CreateDateColumn()

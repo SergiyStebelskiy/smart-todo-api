@@ -22,6 +22,7 @@ export class AuthService {
 
 	async validateUser(email: string, password: string): Promise<any> {
 		const user = await this.usersService.findOneByEmail(email)
+
 		const isMatch = await bcrypt.compare(password, user.password)
 		if (user && isMatch) {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -33,9 +34,14 @@ export class AuthService {
 
 	async login(user: any) {
 		const payload = { email: user.email, sub: user.id }
+		const isValidUser = await this.validateUser(user.email, user.password)
 
-		return {
-			access_token: this.jwtService.sign(payload)
+		if (isValidUser) {
+			return {
+				access_token: this.jwtService.sign(payload)
+			}
+		} else {
+			throw new BadRequestException()
 		}
 	}
 
