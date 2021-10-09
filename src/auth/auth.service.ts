@@ -33,12 +33,14 @@ export class AuthService {
 	}
 
 	async login(user: any) {
-		const payload = { email: user.email, sub: user.id }
-		const isValidUser = await this.validateUser(user.email, user.password)
+		const findedUser = await this.validateUser(user.email, user.password)
 
-		if (isValidUser) {
+		if (findedUser) {
 			return {
-				access_token: this.jwtService.sign(payload)
+				access_token: this.jwtService.sign({
+					email: findedUser.email,
+					sub: findedUser.id
+				})
 			}
 		} else {
 			throw new BadRequestException()
