@@ -1,27 +1,24 @@
-
 # Smart todo
 
 RESTfull Node.js API that applies the best development and security approaches.
 
 Also applied automated tests that check all possible use cases.
 
-
-
 ## Technologies
 
- - [Nest.js](https://nestjs.com)
- - [Typeorm](https://typeorm.io)
- - [Postgres](https://node-postgres.com/)
- - [Typescript](https://www.typescriptlang.org)
- - [Passport.js](http://www.passportjs.org)
- - [Bcrypt](https://www.npmjs.com/package/bcrypt)
- - [RxJS](https://rxjs.dev)
- - [UUID](https://www.npmjs.com/package/uuid)
-
+- [Nest.js](https://nestjs.com)
+- [Typeorm](https://typeorm.io)
+- [Postgres](https://node-postgres.com/)
+- [Typescript](https://www.typescriptlang.org)
+- [Passport.js](http://www.passportjs.org)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [RxJS](https://rxjs.dev)
+- [UUID](https://www.npmjs.com/package/uuid)
 
 ## Main commands
 
 You can use [npm](https://www.npmjs.com) or [yarn](https://yarnpkg.com)
+
 ```bash
   start
 
@@ -36,7 +33,6 @@ You can use [npm](https://www.npmjs.com) or [yarn](https://yarnpkg.com)
 
 For more information: [Nest.js commands](https://docs.nestjs.com/cli/scripts)
 
-
 ## API Reference
 
 #### Registration
@@ -47,12 +43,12 @@ This endpoint needs for create a new user.
   POST /auth/registration
 ```
 
-| Body parameter | Type     | Validation                |
-| :-------- | :------- | :------------------------- |
-| `first_name` | `string` | **Required** |
-| `last_name` | `string` | **Required** |
-| `email` | `string` | **Required** & **isEmail** |
-| `password` | `string` | **Required** |
+| Body parameter | Type     | Validation                 |
+| :------------- | :------- | :------------------------- |
+| `first_name`   | `string` | **Required**               |
+| `last_name`    | `string` | **Required**               |
+| `email`        | `string` | **Required** & **isEmail** |
+| `password`     | `string` | **Required**               |
 
 #### Authentication
 
@@ -62,12 +58,13 @@ This endpoint needs for log in to system and getting a **access token**.
   POST /auth/login
 ```
 
-| Body parameter | Type     | Validation                       |
-| :-------- | :------- | :-------------------------------- |
-| `email`      | `string` | **Required** & **isEmail** |
-| `password` | `string` | **Required** |
+| Body parameter | Type     | Validation                 |
+| :------------- | :------- | :------------------------- |
+| `email`        | `string` | **Required** & **isEmail** |
+| `password`     | `string` | **Required**               |
 
 **For others endpoints needs access token in Authorization header:**
+
 ```
 Authorization: Bearer <token>
 ```
@@ -84,10 +81,9 @@ Authorization: Bearer <token>
   GET /tasks/${id}
 ```
 
-| Query parameter | Type     | Validation                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required** |
-
+| Query parameter | Type     | Validation   |
+| :-------------- | :------- | :----------- |
+| `id`            | `string` | **Required** |
 
 #### Create user task
 
@@ -95,13 +91,12 @@ Authorization: Bearer <token>
   POST /tasks
 ```
 
-| Body parameter | Type     | Validation                       |
-| :-------- | :------- | :-------------------------------- |
-| `name`      | `string` | **Required** |
-| `description` | `string` | **Required** |
-| `checked` | `boolean` | **Default: false** |
-| `priority` | `string` | **low or normal or hight** |
-
+| Body parameter | Type      | Validation                 |
+| :------------- | :-------- | :------------------------- |
+| `name`         | `string`  | **Required**               |
+| `description`  | `string`  | **Required**               |
+| `checked`      | `boolean` | **Default: false**         |
+| `priority`     | `string`  | **low or normal or hight** |
 
 #### Update user task by id
 
@@ -109,15 +104,14 @@ Authorization: Bearer <token>
   PUT /tasks/${id}
 ```
 
-| Body parameter | Type     | Validation                       |
-| :-------- | :------- | :-------------------------------- |
-| `name`      | `string` | **-** |
-| `description` | `string` | **-** |
-| `checked` | `boolean` | **-** |
-| `priority` | `string` | **-** |
+| Body parameter | Type      | Validation |
+| :------------- | :-------- | :--------- |
+| `name`         | `string`  | **-**      |
+| `description`  | `string`  | **-**      |
+| `checked`      | `boolean` | **-**      |
+| `priority`     | `string`  | **-**      |
 
-*you can update only the data you need*
-
+_you can update only the data you need_
 
 #### Delete user task by id
 
@@ -125,23 +119,21 @@ Authorization: Bearer <token>
   DELETE /tasks/${id}
 ```
 
-
 #### Get all system users
 
 ```http
   GET /users
 ```
 
-
 #### Get current user
 
 ```http
   GET /users/${id}
 ```
-| Query parameter | Type     | Validation                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required** |
 
+| Query parameter | Type     | Validation   |
+| :-------------- | :------- | :----------- |
+| `id`            | `string` | **Required** |
 
 #### Delete user by id
 
@@ -149,29 +141,21 @@ Authorization: Bearer <token>
   DELETE /users/${id}
 ```
 
-
 ## Environment Variables
 
 To use this project, you will need to add the following environment variables to your .env file
 
-`APP_ENV` *(test | development | production)*
+`APP_ENV` _(test | development | production)_
 
-`DB_PORT`
+`PORT`
 
-`DB_USERNAME`
+`HOST`
 
-`DB_PASSWORD`
+`USERNAME`
 
-`DB_NAME`
+`PASSWORD`
 
-`TEST_DB_PORT`
-
-`TEST_DB_USERNAME`
-
-`TEST_DB_PASSWORD`
-
-`TEST_DB_NAME`
-
+`DATABASE`
 
 # Security
 
@@ -185,7 +169,6 @@ Also, unauthorized users do not have access to personal data.
 
 All passwords entered by users are hashed.
 This means that no one will be able to find out your password, even if they gain access to the database.
-
 
 ## License
 

@@ -6,11 +6,13 @@ import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { Task } from './tasks/entities/task.entity'
 import { User } from './users/entities/user.entity'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config()
 
 @Module({
 	imports: [
 		TypeOrmModule.forRootAsync({
-			useFactory: async () => {
+			useFactory: async (): Promise<any> => {
 				if (process.env.APP_ENV === 'test') {
 					return {
 						type: 'postgres',
@@ -24,7 +26,20 @@ import { User } from './users/entities/user.entity'
 						keepConnectionAlive: true
 					}
 				}
-				return {}
+				return {
+					type: 'postgres',
+					host: process.env.HOST,
+					port: process.env.PORT,
+					username: process.env.USERNAME,
+					password: process.env.PASSWORD,
+					database: process.env.DATABASE,
+					entities: ['dist/**/*.entity{.ts,.js}'],
+					migrationsTableName: 'migrations',
+					migrations: ['dist/migrations/*.js'],
+					cli: {
+						migrationsDir: 'migrations'
+					}
+				}
 			}
 		}),
 		TasksModule,
