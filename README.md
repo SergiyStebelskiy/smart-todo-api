@@ -1,67 +1,192 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Smart todo
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+RESTfull Node.js API that applies the best development and security approaches.
 
-## Description
+Also applied automated tests that check all possible use cases.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
 
+## Technologies
+
+ - [Nest.js](https://nestjs.com)
+ - [Typeorm](https://typeorm.io)
+ - [Postgres](https://node-postgres.com/)
+ - [Typescript](https://www.typescriptlang.org)
+ - [Passport.js](http://www.passportjs.org)
+ - [Bcrypt](https://www.npmjs.com/package/bcrypt)
+ - [RxJS](https://rxjs.dev)
+ - [UUID](https://www.npmjs.com/package/uuid)
+
+
+## Main commands
+
+You can use [npm](https://www.npmjs.com) or [yarn](https://yarnpkg.com)
 ```bash
-$ npm install
+  start
+
+  start:dev
+
+  start:prod
+
+  build
+
+  test:e2e
 ```
 
-## Running the app
+For more information: [Nest.js commands](https://docs.nestjs.com/cli/scripts)
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+## API Reference
 
-# production mode
-$ npm run start:prod
+#### Registration
+
+This endpoint needs for create a new user.
+
+```http
+  POST /auth/registration
 ```
 
-## Test
+| Body parameter | Type     | Validation                |
+| :-------- | :------- | :------------------------- |
+| `first_name` | `string` | **Required** |
+| `last_name` | `string` | **Required** |
+| `email` | `string` | **Required** & **isEmail** |
+| `password` | `string` | **Required** |
 
-```bash
-# unit tests
-$ npm run test
+#### Authentication
 
-# e2e tests
-$ npm run test:e2e
+This endpoint needs for log in to system and getting a **access token**.
 
-# test coverage
-$ npm run test:cov
+```http
+  POST /auth/login
 ```
 
-## Support
+| Body parameter | Type     | Validation                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required** & **isEmail** |
+| `password` | `string` | **Required** |
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**For others endpoints needs access token in Authorization header:**
+```
+Authorization: Bearer <token>
+```
+
+#### Get user tasks
+
+```http
+  GET /tasks
+```
+
+#### Get user task by id
+
+```http
+  GET /tasks/${id}
+```
+
+| Query parameter | Type     | Validation                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required** |
+
+
+#### Create user task
+
+```http
+  POST /tasks
+```
+
+| Body parameter | Type     | Validation                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **Required** |
+| `description` | `string` | **Required** |
+| `checked` | `boolean` | **Default: false** |
+| `priority` | `string` | **low or normal or hight** |
+
+
+#### Update user task by id
+
+```http
+  PUT /tasks/${id}
+```
+
+| Body parameter | Type     | Validation                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **-** |
+| `description` | `string` | **-** |
+| `checked` | `boolean` | **-** |
+| `priority` | `string` | **-** |
+
+*you can update only the data you need*
+
+
+#### Delete user task by id
+
+```http
+  DELETE /tasks/${id}
+```
+
+
+#### Get all system users
+
+```http
+  GET /users
+```
+
+
+#### Get current user
+
+```http
+  GET /users/${id}
+```
+| Query parameter | Type     | Validation                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required** |
+
+
+#### Delete user by id
+
+```http
+  DELETE /users/${id}
+```
+
+
+## Environment Variables
+
+To use this project, you will need to add the following environment variables to your .env file
+
+`APP_ENV` *(test | development | production)*
+
+`DB_PORT`
+
+`DB_USERNAME`
+
+`DB_PASSWORD`
+
+`DB_NAME`
+
+`TEST_DB_PORT`
+
+`TEST_DB_USERNAME`
+
+`TEST_DB_PASSWORD`
+
+`TEST_DB_NAME`
+
+
+# Security
+
+We care about the security of our application.
+
+To identify our users we use [JSON Web token](https://jwt.io)
+
+Your active session can last up to 24 hours, after which you will be automatically logged out.
+
+Also, unauthorized users do not have access to personal data.
+
+All passwords entered by users are hashed.
+This means that no one will be able to find out your password, even if they gain access to the database.
+
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Smart todo is [MIT licensed](LICENSE).
