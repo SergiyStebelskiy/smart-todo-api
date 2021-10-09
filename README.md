@@ -6,7 +6,7 @@ Also applied automated tests that check all possible use cases.
 
 ## Demo
 
-[Smart-todo-api](http://app-f7f560e7-9e3d-460f-84fa-c7fb4eec9a02.cleverapps.io/)
+[Smart-todo-api](https://smart-todo-api.cleverapps.io/)
 
 ## Technologies
 
